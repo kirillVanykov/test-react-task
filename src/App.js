@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './css/style.min.css';
+import './css/style.min.css'; 
 import './js/scripts.min';
 import React, {Component} from 'react'
 
@@ -27,7 +27,7 @@ class HelloMessage extends React.Component {
     );
   }
 }
-
+  
 class App extends Component {
   render() {
     return (
@@ -37,7 +37,7 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-          <a
+          <a 
             className="App-link"
             href="https://reactjs.org"
             target="_blank"
@@ -45,7 +45,7 @@ class App extends Component {
           >
             Learn React
           </a>
-          <HelloMessage  name="Кирилл"/>
+          <HelloMessage  name="Кирилл Я тут"/>
           <HelloMessage  name="Саня"/>
         </header>
       </div>

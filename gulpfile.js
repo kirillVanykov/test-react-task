@@ -17,6 +17,10 @@ let path = {
     clean:{
         css: src_folder + "/css",
         jsMin: src_folder + "/js/scripts.min.js",
+    },
+    watch:{
+        js: src_folder + "/*.js",
+        sass: src_folder + "/css/*.sass"
     }
 }
 
@@ -40,12 +44,17 @@ let { dest, src } = require("gulp"),
 
 
  /* Обновление браузера start*/
-function browserSync() {
+/* function browserSync() {
     browsersync.init({
-        
+        server:{
+            baseDir: "public/"
+        },
+        port: 3000,
+        notify: false
     })
-}
+} */
  /* Обновление браузера end*/
+
 
 
 function css() {
@@ -84,6 +93,7 @@ function js() {
             })
         )
         .pipe(dest(path.src.js)) 
+        .pipe(browsersync.stream())
 }
 
 
@@ -100,6 +110,10 @@ function fonts() {
 function clean(path) {
     return del(path)
 }
+
+/* function watchFiles() {
+    gulp.watch([path.watch.js, path.watch.css], build);
+} */
 
 /* Сборка sprite svg */
 gulp.task('svgSprite', function () {
@@ -140,16 +154,24 @@ gulp.task('otf2ttf', function () {
         .pipe(dest(path.src.fontsReady))
 })
 
-
+gulp.task('watch', function () {
+    gulp.watch([path.watch.js], js);
+    gulp.watch([path.watch.sass], css);
+})
 
 
 
 let build = gulp.series(css, js);
+/* let watch = gulp.parallel(build, watchFiles, browserSync); */
 
-exports.default = build;
+
+
 exports.build = build;
+
 
 exports.css = css;
 exports.js = js;
 exports.fonts = fonts;
+/* exports.watch = watch; */
+exports.default = build;
 
